@@ -1,8 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
+
 
 app.use(express.json());
+app.use(cors());
 
 const { mongoURI } = require('./config/index.js');
 
@@ -13,7 +16,7 @@ mongoose.connect(mongoURI)
 
 const { verifyToken } = require('./middleware/auth.js');
 
-// Importar rutas
+// Importar rutas 
 const userRoutes = require('./routes/user.js');
 const authRoutes = require('./routes/auth.js');
 const productRoutes = require('./routes/product.js');
@@ -36,7 +39,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Algo salió mal');
 });
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
